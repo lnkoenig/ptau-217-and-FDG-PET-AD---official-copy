@@ -1,0 +1,160 @@
+---
+title: "Figures"
+output: 
+  word_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	dpi = 1000
+)
+```
+
+
+```{r Load and Clean Up Data}
+#Load the R packages necessary for rest of script
+packages <- c("cowplot", "ggseg", "ggplot2", "ggrepel", "tiff")
+for( i in packages ){
+  #  require returns TRUE invisibly if it was able to load package
+  if( ! require( i , character.only = TRUE ) ){
+    #  If package was not able to be loaded then re-install
+    if(i =="ggseg") {
+      source("https://neuroconductor.org/neurocLite.R")
+      neuro_install('ggseg')
+      library('ggseg')
+    }else{
+        install.packages( i , dependencies = TRUE )
+         #  Load package after installing
+          require( i , character.only = TRUE )
+      }
+    }
+}
+
+```
+
+
+
+```{r Combine Example Region and Slope Figs, fig.height=10, fig.width=8}
+# Read the TIFF file into an R array
+
+library(tiff)
+library(cowplot)
+
+img1a <- ggdraw() + draw_image(readTIFF("./output/Figure1/a.tif"))
+img1b <- ggdraw() + draw_image(readTIFF("./output/Figure1/b.tif"))
+img1c <- ggdraw() + draw_image(readTIFF("./output/Figure1/c.tif"))
+img1d <- ggdraw() + draw_image(readTIFF("./output/Figure1/d.tif"))
+img1e <- ggdraw() + draw_image(readTIFF("./output/Figure1/e.tif"))
+img1f <- ggdraw() + draw_image(readTIFF("./output/Figure1/f.tif"))
+
+figure1 <- plot_grid(img1a, img1b, img1c, img1d, img1e, img1f, labels = "AUTO",label_size = 16,
+          ncol = 2, nrow = 3, align = "H", scale = 0.95)
+
+figure1
+
+save_plot("./output/Figure1.tif", figure1, bg = "white",dpi = 600, base_height=10, base_width=8)
+
+
+rm(img1a, img1b, img1c, img1d, img1e, img1f,figure1)
+```
+
+```{r, fig.height=10, fig.width=8}
+
+img3a <- ggdraw() + draw_image(readTIFF("./output/Figure3/a.tif"))
+img3b <- ggdraw() + draw_image(readTIFF("./output/Figure3/b.tif"))
+img3c <- ggdraw() + draw_image(readTIFF("./output/Figure3/c.tif"))
+img3d <- ggdraw() + draw_image(readTIFF("./output/Figure3/d.tif"))
+img3e <- ggdraw() + draw_image(readTIFF("./output/Figure3/e.tif"))
+img3f <- ggdraw() + draw_image(readTIFF("./output/Figure3/f.tif"))
+
+figure3 <- plot_grid(img3a, img3b, img3c, img3d, img3e, img3f, labels = "AUTO",label_size = 16,
+          ncol = 2, nrow = 3, align = "H", scale = 0.95)
+figure3
+
+save_plot("./output/Figure3.tif", figure3, base_height=10, base_width=8, bg = "white",dpi = 600)
+
+
+
+rm(img3a, img3b, img3c, img3d, img3e, img3f,figure3)
+
+```
+
+```{r, fig.height=10, fig.width=12}
+
+imgS2a <- ggdraw() + draw_image(readTIFF("./output/FigureS2/a.tif"))
+imgS2b <- ggdraw() + draw_image(readTIFF("./output/FigureS2/b.tif"))
+imgS2c <- ggdraw() + draw_image(readTIFF("./output/FigureS2/c.tif"))
+imgS2d <- ggdraw() + draw_image(readTIFF("./output/FigureS2/d.tif"))
+imgS2e <- ggdraw() + draw_image(readTIFF("./output/FigureS2/e.tif"))
+imgS2f <- ggdraw() + draw_image(readTIFF("./output/FigureS2/f.tif"))
+imgS2g <- ggdraw() + draw_image(readTIFF("./output/FigureS2/g.tif"))
+imgS2h <- ggdraw() + draw_image(readTIFF("./output/FigureS2/h.tif"))
+imgS2i <- ggdraw() + draw_image(readTIFF("./output/FigureS2/i.tif"))
+imgS2j <- ggdraw() + draw_image(readTIFF("./output/FigureS2/j.tif"))
+imgS2k <- ggdraw() + draw_image(readTIFF("./output/FigureS2/k.tif"))
+imgS2l <- ggdraw() + draw_image(readTIFF("./output/FigureS2/l.tif"))
+imgS2m <- ggdraw() + draw_image(readTIFF("./output/FigureS2/m.tif"))
+imgS2n <- ggdraw() + draw_image(readTIFF("./output/FigureS2/n.tif"))
+
+
+figureS2 <- plot_grid(imgS2a, imgS2b, imgS2c, imgS2d, imgS2e, imgS2f, imgS2g, imgS2h, imgS2i, imgS2j, imgS2k, imgS2l,imgS2m, imgS2n,
+                     labels = "AUTO",label_size = 14,
+          ncol = 4, nrow = 4, align = "H", scale = 0.95)
+figureS2
+
+save_plot("./output/FigureS2.tif", figureS2, base_height=10, base_width=12, bg = "white",dpi = 600)
+
+
+
+rm(imgS2a, imgS2b, imgS2c, imgS2d, imgS2e, imgS2f, imgS2g, imgS2h, imgS2i, imgS2j, imgS2k, imgS2l,imgS2m, imgS2n, figureS2)
+
+```
+
+
+
+```{r, fig.height=6, fig.width=8}
+
+imgS3a <- ggdraw() + draw_image(readTIFF("./output/FigureS3/a.tif"))
+imgS3b <- ggdraw() + draw_image(readTIFF("./output/FigureS3/b.tif"))
+imgS3c <- ggdraw() + draw_image(readTIFF("./output/FigureS3/c.tif"))
+
+
+figureS3 <- plot_grid(imgS3a, imgS3b, imgS3c,
+                     labels = "AUTO",label_size = 14,
+          ncol = 2, nrow = 2, align = "H", scale = 0.95)
+figureS3
+
+save_plot("./output/FigureS3.tif", figureS3, base_height=6, base_width=8, bg = "white",dpi = 600)
+
+
+
+#rm(imgS3a, imgS3b, imgS3c, figureS3)
+
+```
+
+
+```{r, fig.height=10, fig.width=8}
+
+imgS4a <- ggdraw() + draw_image(readTIFF("./output/FigureS4/a.tif"))
+imgS4b <- ggdraw() + draw_image(readTIFF("./output/FigureS4/b.tif"))
+imgS4c <- ggdraw() + draw_image(readTIFF("./output/FigureS4/c.tif"))
+imgS4d <- ggdraw() + draw_image(readTIFF("./output/FigureS4/d.tif"))
+imgS4e <- ggdraw() + draw_image(readTIFF("./output/FigureS4/e.tif"))
+imgS4f <- ggdraw() + draw_image(readTIFF("./output/FigureS4/f.tif"))
+
+
+figureS4 <- plot_grid(imgS4a, imgS4b, imgS4c, imgS4d, imgS4e, imgS4f,
+                     labels = "AUTO",label_size = 16,
+          ncol = 2, nrow = 3, align = "H", scale = 0.95)
+figureS4
+
+save_plot("./output/FigureS4.tif", figureS4, base_height=10, base_width=8, bg = "white",dpi = 600)
+
+
+
+rm(imgS4a, imgS4b, imgS4c, imgS4d, imgS4e, imgS4f, figureS4)
+
+```
